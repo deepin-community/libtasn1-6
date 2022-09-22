@@ -1,0 +1,39 @@
+#!/bin/sh
+
+set -e
+
+man -P cat asn1_strerror
+echo "PASS: man"
+
+WORKDIR=$(mktemp -d)
+trap "rm -rf $WORKDIR" 0 INT QUIT ABRT PIPE TERM
+
+echo '# define CONST_DOWN        (1U<<29)' > $WORKDIR/int.h
+
+cd tests
+for f in `ls *.c | grep -v Test_tree_asn1_tab.c`; do
+    echo foo: $f
+    gcc -I$WORKDIR -o $WORKDIR/foo $f `pkg-config --cflags --libs libtasn1` 2>/dev/null
+    ASN1CHOICE=choice.asn $WORKDIR/foo 2> /dev/null
+    echo PASS: $f
+done
+
+cd $WORKDIR
+cat <<EOF > libtest.c
+#include <libtasn1.h>
+
+int main(void)
+{
+  if (!asn1_check_version (ASN1_VERSION))
+    return 1;
+
+  return 0;
+}
+EOF
+
+gcc -o libtest libtest.c `pkg-config --cflags --libs libtasn1`
+echo "PASS: gcc"
+
+[ -x libtest ]
+./libtest
+echo "PASS: run"

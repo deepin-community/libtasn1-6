@@ -1,0 +1,34 @@
+#!/bin/sh
+
+set -e
+
+asn1Coding --version
+asn1Decoding --version
+asn1Parser --version
+echo "PASS: --version"
+
+asn1Coding --help
+asn1Decoding --help
+asn1Parser --help
+echo "PASS: --help"
+
+asn1Coding --version|(! grep '()')
+asn1Decoding --version|(! grep '()')
+asn1Parser --version|(! grep '()')
+echo "PASS: nonempty --with-packager-version"
+
+man -P cat asn1Coding
+man -P cat asn1Decoding
+man -P cat asn1Parser
+echo "PASS: man"
+
+srcdir=tests/ ASN1PKIX=tests/pkix.asn ASN1DECODING=asn1Decoding tests/decoding.sh
+echo "PASS: decoding.sh"
+
+srcdir=tests ASN1CODING=asn1Coding tests/coding.sh
+echo "PASS: coding.sh"
+
+srcdir=tests PARSER=asn1Parser tests/parser.sh
+echo "PASS: parser.sh"
+
+exit 0

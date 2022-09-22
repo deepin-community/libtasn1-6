@@ -1,0 +1,7 @@
+Tests: lib
+Depends: build-essential, libtasn1-6-dev, man, pkg-config
+Restrictions: allow-stderr
+
+Tests: cli
+Depends: build-essential, libtasn1-bin, man
+Restrictions: allow-stderr
