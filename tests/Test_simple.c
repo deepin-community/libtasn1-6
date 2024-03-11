@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2021 Free Software Foundation, Inc.
+ * Copyright (C) 2011-2022 Free Software Foundation, Inc.
  *
  * This file is part of LIBTASN1.
  *
@@ -86,6 +86,22 @@ main (int argc, char *argv[])
   int str_size = sizeof (str);
   int ret_len, bit_len;
   size_t i;
+
+  {
+    unsigned int etype = 38;
+    unsigned int my_str_len = 10;
+    unsigned char my_str[10];
+    unsigned int tl_len = 10;
+    unsigned char tl[10];
+
+    /* https://gitlab.com/gnutls/libtasn1/-/issues/32 */
+    result = asn1_encode_simple_der (etype, my_str, my_str_len, tl, &tl_len);
+    if (result != ASN1_VALUE_NOT_VALID)
+      {
+	fprintf (stderr, "asn1_encode_simple_der out of range etype\n");
+	return 1;
+      }
+  }
 
   /* Dummy test */
 

@@ -1,3 +1,30 @@
+libtasn1-6 (4.19.0-3) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  *  Apply hints suggested by the multi-arch hinter:
+    + libtasn1-doc: Add Multi-Arch: foreign.
+  * Remove constraints unnecessary since buster (oldstable):
+    + libtasn1-doc: Drop versioned constraint on libtasn1-6-dev in Replaces.
+    + libtasn1-doc: Drop versioned constraint on libtasn1-6-dev in Breaks.
+
+  [ Andreas Metzler ]
+  * Drop ancient (2014 and older) Replaces and Breaks against libtasn1-3-*.
+
+ -- Andreas Metzler <ametzler@debian.org>  Sun, 02 Jul 2023 16:15:40 +0200
+
+libtasn1-6 (4.19.0-2) unstable; urgency=low
+
+  * Upload to unstable.
+
+ -- Andreas Metzler <ametzler@debian.org>  Sun, 11 Sep 2022 11:04:40 +0200
+
+libtasn1-6 (4.19.0-1) experimental; urgency=low
+
+  * New upstream version.
+  * Drop lintian override, #970275 has been fixed.
+
+ -- Andreas Metzler <ametzler@debian.org>  Sat, 03 Sep 2022 14:58:19 +0200
+
 libtasn1-6 (4.18.0-4) unstable; urgency=low
 
   * Set Restrictions: allow-stderr on tests.
