@@ -1,4 +1,4 @@
-# Copyright (C) 2006-2021 Free Software Foundation, Inc.
+# Copyright (C) 2006-2022 Free Software Foundation, Inc.
 # Author: Simon Josefsson
 #
 # This file is part of LIBTASN1.
@@ -18,7 +18,7 @@
 
 manual_title = Library for Abstract Syntax Notation One (ASN.1)
 
-old_NEWS_hash = d1ceb75ae4fc9ca56035419de91948d7
+old_NEWS_hash = 7552c904096db5eb5310051b1b7d8560
 
 bootstrap-tools = gnulib,autoconf,automake,libtoolize,make,makeinfo,bison,help2man,gtkdocize,tar,gzip
 
@@ -42,7 +42,8 @@ exclude_file_name_regexp--sc_unmarked_diagnostics = ^tests/Test_tree.c$$
 exclude_file_name_regexp--sc_prohibit_undesirable_word_seq = ^msvc/.*$$
 exclude_file_name_regexp--sc_trailing_blank = ^msvc/.*|tests/(TestCertOctetOverflow.der|TestIndef.p12|TestIndef2.p12|TestIndef3.der|invalid-assignments2.txt)|tests/invalid-x509/id-.*$$
 exclude_file_name_regexp--sc_useless_cpp_parens = ^lib/includes/libtasn1.h$$
-exclude_file_name_regexp--sc_prohibit_eol_brackets = ^(tests/.*|fuzz/.*|bootstrap)$$
+exclude_file_name_regexp--sc_prohibit_eol_brackets = ^(autogen.sh|autopull.sh|bootstrap-funclib.sh|tests/.*|fuzz/.*|bootstrap)$$
+exclude_file_name_regexp--sc_makefile_DISTCHECK_CONFIGURE_FLAGS = ^Makefile.am$$
 
 sc_prohibit_eol_brackets:
 	@prohibit='.+\) *{$$' \
@@ -54,13 +55,17 @@ sc_codespell:
 		codespell -L tim,sorce `git ls-files|egrep -v '_fuzzer.in|_fuzzer.repro|gnulib|tests/.*.der|tests/TestIndef.*.p12|tests/built-in-type.asn|tests/crlf.cer|tests/invalid-assignments2.txt|windows/libtasn1.ncb|windows/libtasn1.suo$$'`; \
 	fi
 
+sc_libtool_version_bump:
+	@git diff v$(PREV_VERSION).. | grep -q '^+AC_SUBST(LT'
+
 aximport:
 	for f in m4/ax_*.m4; do \
 		wget -O $$f "https://git.savannah.gnu.org/gitweb/?p=autoconf-archive.git;a=blob_plain;f=$$f"; \
 	done
 
+review-tag ?= $(shell git describe --abbrev=0)
 review-diff:
-	git diff `git describe --abbrev=0`.. \
-	| grep -v -e ^index -e '^diff --git' \
-	| filterdiff -p 1 -x 'gl/*' -x 'build-aux/*' -x 'lib/gl*' -x 'po/*' -x 'maint.mk' -x '.gitignore' \
+	git diff $(review-tag).. \
+	| grep -v -e '^index' -e '^deleted file mode' -e '^new file mode' \
+	| filterdiff -p 1 -x 'build-aux/*' -x 'lib/gl*' -x 'po/*' -x 'maint.mk' -x '.gitignore' -x '.gitlab-ci.yml' -x .prev-version -x autogen.sh -x autopull.sh -x bootstrap -x bootstrap-funclib.sh \
 	| less

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2021 Free Software Foundation, Inc.
+ * Copyright (C) 2000-2022 Free Software Foundation, Inc.
  *
  * This file is part of LIBTASN1.
  *
@@ -19,7 +19,7 @@
  * 02110-1301, USA
  */
 
-#include <limits.h>		// WORD_BIT
+#include <limits.h>		/* WORD_BIT */
 
 #include "int.h"
 #include "parser_aux.h"

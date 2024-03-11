@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2021 Free Software Foundation, Inc.
+ * Copyright (C) 2002-2022 Free Software Foundation, Inc.
  *
  * This file is part of LIBTASN1.
  *
@@ -28,7 +28,7 @@
 #ifndef _STRUCTURE_H
 # define _STRUCTURE_H
 
-# include "parser_aux.h"	// list_type
+# include "parser_aux.h"	/* list_type */
 
 int _asn1_create_static_structure (asn1_node_const pointer,
 				   char *output_file_name, char *vector_name);

@@ -1,4 +1,94 @@
+2022-08-23  Simon Josefsson  <simon@josefsson.org>
+
+	version 4.19.0
+	* NEWS: Record release date.
+
+	Work around unfixed gtk-doc problem.
+	Reported by Roman Bogorodskiy in
+	https://lists.gnu.org/archive/html/help-libtasn1/2021-11/msg00004.html
+	https://gitlab.gnome.org/GNOME/gtk-doc/-/issues/37
+	https://gitlab.gnome.org/GNOME/gtk-doc/-/merge_requests/67
+
+	Improve CI/CD artifacts, and fail on errors.
+
+	Put version checks in tests/version.c.
+
+	Deduplicate.
+
+	bootstrap.conf (src_gnulib_modules): Add getopt-gnu.
+	Needed on UnixWare for getopt_long.
+	Reported by Tim Rice <tim@multitalents.net>.
+
+	Build check with tcc/lld/pcc.
+
+2022-08-18  Simon Josefsson  <simon@josefsson.org>
+
+	Some C89 fixes.  Closes: !70.
+
+	Attempt to reproduce !70 build error.
+
+2022-08-17  Simon Josefsson  <simon@josefsson.org>
+
+	Bump LT_REVISION.
+
+	Add sc_libtool_version_bump syntax-check.
+
+	Move gnulib's dummy test directory from tests-gl to lib/gl/tests.
+
+	Add NEWS entry.
+
+	Fix ETYPE_OK off by one array size check.  Closes: #32.
+	Reported by David Trabish in
+	<https://gitlab.com/gnutls/libtasn1/-/issues/32>.
+
+	Make sure syntax-check catches indent mistakes during cicd.
+
+	Add self-check for #32 to see if cicd catches it.
+
+	Fix license header.  Closes: #38.
+
+	Add NEWS entry.
+
+	Silence syntax-check.
+
+	Silence sc_makefile_DISTCHECK_CONFIGURE_FLAGS until we clean up coverage code.
+
+	Put gtkdocize in bootstrap_post_import_hook.
+
+	Update bootstrap.
+
+	Update gnulib.
+
+	Bump copyright years.
+
+2021-11-11  Simon Josefsson  <simon@josefsson.org>
+
+	Don't use -static when linking in fuzz/.  Closes: !61.
+
+2021-11-10  Simon Josefsson  <simon@josefsson.org>
+
+	Use portable way to remove carriage returns.
+
+	Don't use non-portable diff --strip-trailing-cr.
+
+	cicd: Add targets, reduce texlive.
+
+	maint: Fix builddir!=srcdir abi-check failure.
+
+	maint: Attempt to minimize texlive dependencies.
+
+	maint: Fix (and CICD-test) builddir!=srcdir bootstrap builds.
+
 2021-11-09  Simon Josefsson  <simon@josefsson.org>
+
+	maint: Remove really old release announcement template.
+
+	maint: Really remove texinfo.css.
+
+	maint: post-release administrivia
+	* NEWS: Add header line for next release.
+	* .prev-version: Record previous version.
+	* cfg.mk (old_NEWS_hash): Auto-update.
 
 	version 4.18.0
 	* NEWS: Record release date.

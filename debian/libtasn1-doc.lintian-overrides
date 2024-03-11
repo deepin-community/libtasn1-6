@@ -1,2 +1,0 @@
-# This is the canonical location for gtk-doc files. #970275
-libtasn1-doc: package-contains-documentation-outside-usr-share-doc usr/share/gtk-doc/html/libtasn1/*.html

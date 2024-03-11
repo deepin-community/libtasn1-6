@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-# Copyright (C) 2002-2021 Free Software Foundation, Inc.
+# Copyright (C) 2002-2022 Free Software Foundation, Inc.
 #
 # This file is part of LIBTASN1.
 #
@@ -59,19 +59,17 @@ TEST_EXTENSIONS = .sh
 
 MOSTLYCLEANFILES = Test_parser_ERROR.asn CVE-2018-1000654-1_asn1_tab.h CVE-2018-1000654-2_asn1_tab.h
 
-check_PROGRAMS = Test_parser Test_tree Test_encoding Test_indefinite \
-	Test_errors Test_simple Test_overflow Test_strings Test_choice \
-	Test_encdec copynode coding-decoding2 strict-der Test_choice_ocsp \
-	ocsp-basic-response octet-string coding-long-oid object-id-decoding \
-	spc_pe_image_data setof CVE-2018-1000654 reproducers object-id-encoding
+ctests = Test_parser Test_tree Test_encoding Test_indefinite		\
+	Test_errors Test_simple Test_overflow Test_strings		\
+	Test_choice Test_encdec copynode coding-decoding2 strict-der	\
+	Test_choice_ocsp ocsp-basic-response octet-string		\
+	coding-long-oid object-id-decoding spc_pe_image_data setof	\
+	CVE-2018-1000654 reproducers object-id-encoding version
 
-TESTS = Test_parser Test_tree Test_encoding Test_indefinite	\
-	Test_errors Test_simple Test_overflow crlf.sh threadsafety.sh \
-	Test_strings Test_choice Test_encdec copynode coding-decoding2 \
-	strict-der Test_choice_ocsp decoding.sh decoding-invalid-x509.sh \
-	ocsp-basic-response octet-string coding-long-oid object-id-decoding \
-	spc_pe_image_data decoding-invalid-pkcs7.sh coding.sh setof \
-	CVE-2018-1000654 parser.sh reproducers object-id-encoding
+check_PROGRAMS = $(ctests)
+TESTS = $(ctests) crlf.sh threadsafety.sh decoding.sh			\
+	decoding-invalid-x509.sh decoding-invalid-pkcs7.sh coding.sh	\
+	parser.sh
 
 CVE-2018-1000654-1_asn1_tab.h: $(srcdir)/CVE-2018-1000654-1.asn
 	$(top_builddir)/src/asn1Parser$(EXEEXT) $^ -o $@
